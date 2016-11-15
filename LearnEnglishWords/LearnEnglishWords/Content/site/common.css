@@ -1,0 +1,128 @@
+﻿
+span.field-validation-error {
+    font-size: 14px;
+    color: darkred;
+    margin-left: 10px;
+}
+
+.timer-fadein {
+    display: none;
+}
+
+.margin10 {
+    margin: 10px !important;
+}
+
+.paddingNone {
+    padding: 0 !important;
+}
+
+ul.custom-list a {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* bs-callout */
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 15px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+    .bs-callout p {
+        font-size: 14px;
+    }
+
+    .bs-callout h4 {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+.bs-callout-danger {
+    border-left-color: #ce4844;
+}
+
+    .bs-callout-danger h4 {
+        color: #ce4844;
+    }
+
+.bs-callout-info {
+    border-left-color: #1b809e;
+}
+
+    .bs-callout-info h4 {
+        color: #1b809e;
+    }
+
+.bs-callout-warning {
+    border-left-color: #aa6708;
+}
+
+    .bs-callout-warning h4 {
+        color: #aa6708;
+    }
+
+
+/* Message popup */
+
+.ui-popup-container h3 {
+    padding-top: 40px !important;
+}
+
+#popupDialog div[role=main] a:last-child {
+    float: right;
+}
+
+#popupDialog div[role=main] div.ui-input-text {
+    min-width: 300px;
+}
+
+#popupDialogInpBox div[role=main] a:last-child {
+    float: right;
+}
+
+#popupDialogInpBox div[role=main] div.ui-input-text {
+    min-width: 300px;
+}
+
+#popupDialogInputTextDiv {
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.progressbar {
+    position: absolute;
+    width: 90%;
+    left: 0;
+    right: 0;
+    height: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #e9e9e9 /*{a-bar-background-color}*/;
+    border-color: #ddd /*{a-bar-border}*/;
+    color: #333 /*{a-bar-color}*/;
+    text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #eee /*{a-bar-shadow-color}*/;
+    border-style: solid;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+    border-width: 1px;
+}
+
+    .progressbar .progress {
+        width: 20%;
+        height: 15px;
+        border-radius: 5px;
+        background-color: #3388cc /*{a-active-background-color}*/;
+        border-color: #3388cc /*{a-active-border}*/;
+        color: #fff /*{a-active-color}*/;
+        text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #005599 /*{a-active-shadow-color}*/;
+    }

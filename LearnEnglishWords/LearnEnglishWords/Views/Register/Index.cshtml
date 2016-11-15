@@ -1,0 +1,67 @@
+﻿@model LearnEnglishWords.Models.UserModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/site/login.css">
+    <link rel="stylesheet" type="text/css" href="/Content/site/common.css">
+
+    <script src="/Scripts/jquery-2.1.4.js"></script>
+    <script src="/Scripts/jquery.mobile-1.4.5.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title> Login page </title>
+</head>
+<body>
+    <div data-role="header">
+        <h1> LearnEnglishWords </h1>
+    </div>
+
+    <div class="title">
+        <p> Страница регистрации пользователя. </p>
+    </div>
+
+    <form action="/Register/New" method="POST" data-ajax="false">
+        <div class="login-block">
+            <div class="login">
+                <input name="name" type="text" value="@(Model?.Name)" placeholder="Имя" />
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="login">
+                <input name="login" type="text" value="@(Model?.Login)" placeholder="Логин"/>
+                @Html.ValidationMessageFor(model => model.Login)
+            </div>
+
+            <div class="password">
+                <input name="password" type="password" placeholder="Пароль"/>
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+
+            <div class="">
+                <input name="email" type="text" value="@(Model?.Email)" placeholder="E-Mail"/>
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+
+            <div class="result message-warning">
+                <p>@(ViewBag.Error)</p>
+            </div>
+
+            <div class="submit">
+                <input type="submit" value="Зарегистрировать"/>
+            </div>
+
+        </div>
+    </form>
+
+</body>
+</html>
+
+<script src="/Scripts/Site/Utils.js"></script>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="LearnEnglishWords" namespace="LearnEnglishWords.Database.Entities">
+
+  <class name="Progress" table="Progress" lazy="true">
+    <id name="Id" column="id">
+      <generator class="guid" />
+    </id>
+
+    <property name="HitsCount" column="hits_count" type="Int32"/>
+
+    <many-to-one name="User" class="User" column="user_id" cascade="none" />
+    <many-to-one name="Word" class="Word" column="word_id" cascade="none" />
+
+  </class>
+
+</hibernate-mapping>
+

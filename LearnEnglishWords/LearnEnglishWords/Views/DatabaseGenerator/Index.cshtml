@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "База данных";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a data-role="button" class="margin10" data-icon="check" onclick="CreateDB()">Создать БД</a>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <div class="timer-fadein bs-callout bs-callout-danger">
+        <h4> Database error </h4>
+        <p> @ViewBag.Error </p>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Info))
+{
+    <div class="timer-fadein bs-callout bs-callout-info">
+        <h4> Database information </h4>
+        <p> @ViewBag.Info </p>
+    </div>
+}
+
+<script type="text/javascript">
+    backUrl = "/Settings/Index";
+
+    function CreateDB() {
+        $("body").inpBox({
+            password: true,
+            caption: "Пароль",
+            head: "Для создания БД необходимо ввести пароль",
+            placeholder: "Пароль",
+            firstButtonCaption: "Отмена",
+            secondButtonCaption: "Создать",
+            onSecondButton: function (data) {
+                redirect('/DatabaseGenerator/CreateDatabase?password=' + data);
+            }
+        });
+    }
+
+</script>

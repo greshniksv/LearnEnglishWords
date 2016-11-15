@@ -1,0 +1,58 @@
+﻿.cost-page table {
+    width: 100%;
+    /*border-color: #ddd;
+        border-style: solid;
+        border-radius: 10px;*/
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table tr{
+    border-bottom: 1px solid #bbb;
+}
+
+table th:first-child {
+    width: 50px;
+}
+
+table td {
+    text-align: center;
+}
+
+table th:last-child {
+    width: 150px;
+}
+
+table th {
+    background-color: #bbb;
+    border-style: solid;
+    border-color: #f9f9f9;
+    border-radius: 20px;
+}
+
+table .ui-input-text {
+    border-style: none;
+    width: 150px;
+    margin: .3em 0;
+}
+
+tr.holiday {
+    background-color: #C0FCE5;
+}
+
+tr.holiday td:first-child {
+    font-weight: 600;
+}
+
+#generator {
+    background-color: #f9f9f9;
+    padding: 10px;
+    display: none;
+}
+
+#generator h2 {
+    margin: 0px;
+    padding: 5px;
+}

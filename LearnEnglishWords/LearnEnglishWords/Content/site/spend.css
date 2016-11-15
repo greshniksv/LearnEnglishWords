@@ -1,0 +1,67 @@
+﻿.spend-row-detail div{
+    padding: 0 !important;
+}
+
+.spend-row{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.spend-row-detail ul{
+    margin: 1px 10px 10px 10px !important;
+    padding-top: 5px;
+}
+
+ul.editable div.ui-input-text:first-child {
+    width: 65%;
+    display: inline-block;
+}
+
+div.spend-value {
+    width: 20%;
+    display: inline-block;
+}
+
+div.spend-value div{
+    width: 100% !important;
+}
+
+div.formula-button {
+    display: inline-block;
+    width: 50px;
+    height: 10px;
+    position: inherit;
+    cursor: pointer;
+}
+
+ul.editable div:last-child {
+   
+}
+
+ul.editable li) {
+    padding: 0px 10px 0px 10px !important;
+}
+
+li.add-spend div{
+    width: 35% !important;
+    height: 30px;
+    line-height: 30px;
+}
+
+.spend-sum {
+    display: inline-block;
+    line-height: 50px !important;
+}
+
+.spend-add {
+    display: inline-block;
+    float: right;
+}
+
+#popupDialogFormula div[role=main] div.ui-input-text {
+    width: 300px;
+}
+
+#popupDialogFormula div[role=main] a:last-child {
+    float: right;
+}

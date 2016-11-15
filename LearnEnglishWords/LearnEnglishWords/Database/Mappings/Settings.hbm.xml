@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="LearnEnglishWords" namespace="LearnEnglishWords.Database.Entities">
+
+  <class name="Settings" table="Settings" lazy="true">
+    <id name="Id" column="id">
+      <generator class="increment" />
+    </id>
+
+    <property name="Type" column="type" type="String"/>
+    <property name="Name" column="name" type="String"/>
+    <property name="Value" column="value" type="String"/>
+
+    <many-to-one name="User" class="User" column="user_id" cascade="none" />
+
+  </class>
+
+</hibernate-mapping>
+

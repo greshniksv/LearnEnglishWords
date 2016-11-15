@@ -1,0 +1,75 @@
+﻿
+#save{
+    display: none;
+}
+
+#mypanel a{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.wait-overlay {
+    background-color: lightgrey;
+    opacity: 0.6;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-image: url('/Content/images/ajax-loader.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+.user-name {
+    display: inline-block;
+    float: right;
+    font-size: 18px;
+    padding: 15px;
+    text-transform: capitalize;
+    color: darkblue;
+}
+
+.content{
+    padding-bottom: 50px;
+    padding-top: 40px;
+}
+
+/* Footer */
+
+[data-role=page]{
+    height: 100% !important; 
+    position:relative !important;
+}
+
+[data-role=footer] {
+    bottom:0; 
+    position:fixed !important; 
+    top: auto !important; 
+    width:100%;
+    z-index: 1500;
+}
+
+[data-role=header]{ 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1500;
+}
+
+[data-role=footer] a:first-child {
+    margin-left: 5px;
+}
+
+[data-role=footer] a:last-child {
+    float: right;
+    margin-right: 5px;
+}
+
+div#mypanel>div>ul {
+    padding-top: 45px;
+}

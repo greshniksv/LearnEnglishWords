@@ -1,0 +1,51 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link rel="stylesheet" type="text/css" href="/Content/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/site/layout.css">
+    <link rel="stylesheet" type="text/css" href="/Content/site/common.css">
+
+    <script src="/Scripts/jquery-2.1.4.js"></script>
+    <script src="/Scripts/jquery.mobile-1.4.5.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <title> @ViewBag.Title </title>
+</head>
+<body>
+
+<div class='wait-overlay'></div>
+
+
+<div data-role="page">
+    <div data-role="header">
+        <a onclick="panel()" data-icon="bars">Меню</a>
+        <h1> @ViewBag.Title </h1>
+        <a id="logout" onclick="logOut()" href="#" data-icon="power">Выйти</a>
+    </div>
+
+    <div class="content">
+        @RenderBody()    
+    </div>
+    
+    
+    <div data-role="footer">
+        <a onclick="doBack()" data-icon="back">Назад</a>
+        <a href="#" data-icon="user">
+           @(HttpContext.Current?.User?.Identity.Name)
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+<script src="/Scripts/Site/layout.js"></script>
+<script src="/Scripts/Site/animate.js"></script>
+<script src="/Scripts/Site/msgBox.js"></script>
+<script src="/Scripts/Site/inpBox.js"></script>
+<script src="/Scripts/Site/Utils.js"></script>
