@@ -9,6 +9,8 @@
     <property name="WordItem" column="word" type="String"/>
     <property name="Translation" column="translation" type="String"/>
 
+    <many-to-one name="Dictionary" class="Dictionary" column="dictionary_id" cascade="none" />
+    
     <bag name="Progress" cascade="none" lazy="true">
       <key column="word_id" />
       <one-to-many class="Progress" />

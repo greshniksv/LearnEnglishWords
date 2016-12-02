@@ -404,6 +404,9 @@
     <EmbeddedResource Include="Database\Mappings\Settings.hbm.xml">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Database\Mappings\Dictionary.hbm.xml">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -471,7 +474,8 @@
     <Compile Include="Database\Entities\Task.cs" />
     <Compile Include="Database\Entities\TaskNote.cs" />
     <Compile Include="Database\Entities\User.cs" />
-    <Compile Include="Database\Entities\Words.cs" />
+    <Compile Include="Database\Entities\Dictionary.cs" />
+    <Compile Include="Database\Entities\Word.cs" />
     <Compile Include="Exceptions\CookieDecryptException.cs" />
     <Compile Include="Exceptions\CostNotFoundException.cs" />
     <Compile Include="Exceptions\PlanNotFoundException.cs" />

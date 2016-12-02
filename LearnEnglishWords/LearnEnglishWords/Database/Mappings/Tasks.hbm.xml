@@ -11,7 +11,12 @@
     <property name="Name" column="name" type="String"/>
 
     <many-to-one name="User" class="User" column="user_id" cascade="none" />
-
+    
+    <bag name="TaskNotes" cascade="none" lazy="true">
+      <key column="task_id" />
+      <one-to-many class="TaskNote" />
+    </bag>
+    
   </class>
 
 </hibernate-mapping>

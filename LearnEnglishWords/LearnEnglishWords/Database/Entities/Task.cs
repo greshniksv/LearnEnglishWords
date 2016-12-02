@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace LearnEnglishWords.Database.Entities
 {
     public class Task
     {
         private User _user;
+        IList<TaskNote> _taskNotes = new List<TaskNote>();
 
         public virtual int Id
         {
@@ -39,6 +37,12 @@ namespace LearnEnglishWords.Database.Entities
         {
             get { return _user; }
             set { _user = value; }
+        }
+
+        public virtual IList<TaskNote> TaskNotes
+        {
+            get { return _taskNotes; }
+            set { _taskNotes = value; }
         }
     }
 }

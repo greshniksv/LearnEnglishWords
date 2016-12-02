@@ -1,16 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="LearnEnglishWords" namespace="LearnEnglishWords.Database.Entities">
 
-  <class name="TaskNote" table="TaskNotes" lazy="true">
+  <class name="Dictionary" table="Dictionaries" lazy="true">
     <id name="Id" column="id">
       <generator class="increment" />
     </id>
 
-    <property name="DateTime" column="date" type="DateTime"/>
-    <property name="Message" column="message" type="String"/>
+    <property name="Name" column="name" type="String"/>
 
     <many-to-one name="User" class="User" column="user_id" cascade="none" />
-    <many-to-one name="Task" class="Task" column="task_id" cascade="none" />
+    
+    <bag name="Words" cascade="none" lazy="true">
+      <key column="dictionary_id" />
+      <one-to-many class="Word" />
+    </bag>
 
   </class>
 

@@ -49,28 +49,83 @@ namespace LearnEnglishWords.Database
 
         private static void InsertTestData()
         {
-            Random random = new Random();
-
             var user = new User
             {
                 Name = "admin",
                 Login = "admin",
                 Password = "123456",
+                LastLogin = DateTime.Now
             };
 
-            var lenkaUser = new User
+            var dict = new Dictionary()
             {
-                Name = "Ленка",
-                Login = "lenka",
-                Password = "123456",
+                Name = "Base",
+                User = user
+            };
+            user.Dictionaries.Add(dict);
+
+            var word1 = new Word()
+            {
+                WordItem = "Car",
+                Translation = "Машина",
+                Dictionary = dict
             };
 
-            var sergUser = new User
+            var word2 = new Word()
             {
-                Name = "Серж",
-                Login = "serg",
-                Password = "123456",
+                WordItem = "Door",
+                Translation = "Дверь",
+                Dictionary = dict
             };
+
+            var progress = new Progress()
+            {
+                User = user,
+                HitsCount = 0,
+                Word = word1
+            };
+            word1.Progress.Add(progress);
+            word2.Progress.Add(progress);
+
+            var task = new Task()
+            {
+                User = user,
+                Name = "Test",
+                Status = 0,
+                Type = 1
+            };
+
+            TaskNote taskNote = new TaskNote()
+            {
+                User = user,
+                Task = task,
+                DateTime = DateTime.Now,
+                Message = "bla bla"
+            };
+            task.TaskNotes.Add(taskNote);
+
+            Entities.Settings settings = new Entities.Settings()
+            {
+                User = user,
+                Name = "fdgfxg",
+                Value = "11",
+                Type = "Test.test"
+            };
+
+            using (var session = Session)
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Save(user);
+                session.Save(dict);
+                session.Save(word1);
+                session.Save(word2);
+                session.Save(progress);
+                session.Save(task);
+                session.Save(taskNote);
+                session.Save(settings);
+
+                transaction.Commit();
+            }
         }
     }
 }

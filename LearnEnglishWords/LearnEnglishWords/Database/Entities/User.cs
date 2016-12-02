@@ -9,6 +9,7 @@ namespace LearnEnglishWords.Database.Entities
         IList<Settings> _settings = new List<Settings>();
         IList<Task> _task = new List<Task>();
         IList<TaskNote> _taskNote = new List<TaskNote>();
+        IList<Dictionary> _dictionary = new List<Dictionary>();
 
         public virtual Guid Id
         {
@@ -50,6 +51,13 @@ namespace LearnEnglishWords.Database.Entities
             get;
             set;
         }
+
+        public virtual IList<Dictionary> Dictionaries
+        {
+            get { return _dictionary; }
+            set { _dictionary = value; }
+        }
+
         public virtual IList<Settings> Settings
         {
             get { return _settings; }
