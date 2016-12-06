@@ -471,6 +471,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Database\Db.cs" />
     <Compile Include="Database\Entities\Interfaces\IDeleteMarker.cs" />
     <Compile Include="Database\Entities\Progress.cs" />
@@ -524,6 +525,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
