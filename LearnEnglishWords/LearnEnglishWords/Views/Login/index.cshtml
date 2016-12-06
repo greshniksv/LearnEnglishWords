@@ -1,5 +1,4 @@
-﻿@using System.Web.Optimization
-@model LearnEnglishWords.Models.LoginModel
+﻿@model LearnEnglishWords.Models.LoginModel
 @{
     Layout = null;
 }
@@ -51,6 +50,10 @@
             
             <div class="submit">
                 <input type="button" value="Зарегистрироваться" onclick="Utils.Redirect('/register')" />
+            </div>
+            
+            <div class="submit">
+                <input type="button" value="Восстановить пароль" onclick="Utils.Redirect('/register/RestorePassword')" />
             </div>
 
         </div>

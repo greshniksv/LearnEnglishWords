@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading;
 using System.Web.Mvc;
 using LearnEnglishWords.Commands;
 using LearnEnglishWords.Models;
 using LearnEnglishWords.Queries;
 using MediatR;
 using Microsoft.Practices.Unity;
-using NHibernate.Util;
 
 namespace LearnEnglishWords.Controllers
 {
@@ -51,6 +50,27 @@ namespace LearnEnglishWords.Controllers
             }
 
             return View("Index", model);
+        }
+
+        public ActionResult RestorePassword(string email)
+        {
+            if (ModelState.IsValid && !string.IsNullOrEmpty(email))
+            {
+                var usersByEmail = _mediator.Send(new GetUserByQuery { Email = email });
+
+                if (usersByEmail != null)
+                {
+                    // Send mail
+                    _mediator.Send(new RestorePasswordCommand {Email = email});
+                    return View("PasswordRestored");
+                }
+
+                // Brute-force breaker
+                Thread.Sleep(1000);
+                ViewBag.Error = "Пользователь с таким E-Mail не найден";
+            }
+
+            return View("RestorePassword");
         }
     }
 }
