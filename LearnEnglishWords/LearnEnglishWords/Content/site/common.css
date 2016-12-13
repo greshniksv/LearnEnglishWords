@@ -69,7 +69,7 @@ ul.custom-list a {
 /* Message popup */
 
 .ui-popup-container h3 {
-    padding-top: 40px !important;
+    /*padding-top: 40px !important;*/
 }
 
 #popupDialog div[role=main] a:last-child {

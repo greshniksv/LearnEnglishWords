@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
+using System.Web.Razor.Text;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Mapping;
@@ -49,6 +52,8 @@ namespace LearnEnglishWords.Database
 
         private static void InsertTestData()
         {
+            string path = HttpContext.Current.Server.MapPath("~/App_Data/words.txt");
+
             var user = new User
             {
                 Name = "admin",
@@ -123,6 +128,19 @@ namespace LearnEnglishWords.Database
                 session.Save(task);
                 session.Save(taskNote);
                 session.Save(settings);
+
+                using (TextReader reader = new StreamReader(path))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var word = new MainWord
+                        {
+                            Word = line
+                        };
+                        session.Save(word);
+                    }
+                }
 
                 transaction.Commit();
             }

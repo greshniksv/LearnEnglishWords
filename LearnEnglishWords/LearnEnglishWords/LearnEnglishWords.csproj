@@ -167,7 +167,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\words.txt" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\giphy.gif" />
     <Content Include="Content\images\icons-png\action-black.png" />
     <Content Include="Content\images\icons-png\action-white.png" />
     <Content Include="Content\images\icons-png\alert-black.png" />
@@ -407,6 +409,10 @@
     <EmbeddedResource Include="Database\Mappings\Dictionary.hbm.xml">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Database\Mappings\MainWords.hbm.xml">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <Content Include="Content\site\show_word.css" />
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -424,8 +430,7 @@
     <Content Include="Content\site\home.css" />
     <Content Include="Content\site\spend.css" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
-    <None Include="Properties\PublishProfiles\SBK - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\SBK - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\LearnEnglishWords Settings.pubxml" />
     <None Include="Properties\PublishProfiles\xg.pubxml" />
     <None Include="Scripts\jquery-2.1.4-vsdoc.js" />
     <Content Include="Scripts\external\jquery-ui\datepicker.js" />
@@ -465,9 +470,12 @@
     <Compile Include="Commands\AddUserCommandHandler.cs" />
     <Compile Include="Commands\RestorePasswordCommand.cs" />
     <Compile Include="Commands\RestorePasswordCommandHandler.cs" />
+    <Compile Include="Commands\SaveWordCommand.cs" />
+    <Compile Include="Commands\SaveWordCommandHandler.cs" />
     <Compile Include="Commands\SendEmailCommand.cs" />
     <Compile Include="Commands\SendEmailCommandHandler.cs" />
     <Compile Include="Controllers\DatabaseGeneratorController.cs" />
+    <Compile Include="Controllers\DictionaryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -480,6 +488,7 @@
     <Compile Include="Database\Entities\TaskNote.cs" />
     <Compile Include="Database\Entities\User.cs" />
     <Compile Include="Database\Entities\Dictionary.cs" />
+    <Compile Include="Database\Entities\MainWord.cs" />
     <Compile Include="Database\Entities\Word.cs" />
     <Compile Include="Exceptions\CookieDecryptException.cs" />
     <Compile Include="Exceptions\CostNotFoundException.cs" />
@@ -491,16 +500,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DictionaryModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\WordModel.cs" />
     <Compile Include="Modules\AuthHttpModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\GeneratePasswordQuery.cs" />
     <Compile Include="Queries\GeneratePasswordQueryHandler.cs" />
+    <Compile Include="Queries\GetDictionariesQuery.cs" />
+    <Compile Include="Queries\GetDictionariesQueryHandler.cs" />
     <Compile Include="Queries\GetUserByQuery.cs" />
     <Compile Include="Queries\GetUserByQueryHandler.cs" />
     <Compile Include="Queries\GetUsersQuery.cs" />
     <Compile Include="Queries\GetUsersQueryHandler.cs" />
+    <Compile Include="Queries\GetWordsQuery.cs" />
+    <Compile Include="Queries\GetWordsQueryHandler.cs" />
+    <Compile Include="Queries\IsCorrectWordQuery.cs" />
+    <Compile Include="Queries\IsCorrectWordQueryHandler.cs" />
     <Compile Include="Unility\Interfaces\IHashCalculator.cs" />
     <Compile Include="Unility\MD5HashCalculator.cs" />
   </ItemGroup>
@@ -515,6 +532,9 @@
     <Content Include="Views\Register\Successfully.cshtml" />
     <Content Include="Views\Register\RestorePassword.cshtml" />
     <Content Include="Views\Register\PasswordRestored.cshtml" />
+    <Content Include="Views\Dictionary\Index.cshtml" />
+    <Content Include="Views\Dictionary\Show.cshtml" />
+    <Content Include="Views\Dictionary\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -523,9 +543,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

@@ -1,0 +1,143 @@
+﻿@model  IList<LearnEnglishWords.Models.WordModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/site/show_word.css">
+
+<a data-role="button" class="margin10" data-icon="check" onclick="AddWord(@Model.First().DictionaryId)">Добавить</a>
+
+<div class="paln-list">
+    <ul class="margin10 custom-list" data-role="listview" data-inset="true" data-split-icon="gear">
+        <li data-role="list-divider"> Слова: </li>
+
+        @foreach (var item in Model)
+        {
+            <li word-id='@item.Id' word-en='@item.WordItem' word-ru='@item.Translation'>
+                <a href="#">
+                    <b>@item.Translation</b>
+                    <span class="ui-li-count ui-body-inherit">@item.WordItem</span>
+                </a>
+                <a href="#" onclick="EditWord(this)"></a>
+            </li>
+        }
+
+    </ul>
+</div>
+
+<div data-role="popup" id="popupEditWord" data-theme="a" class="ui-corner-all">
+    <form id="formEditWord">
+        <div>
+            <div class="margin10">
+                <h3>Изменить слово</h3>
+
+                <input type="hidden" name="id" id="word_id" value="" data-theme="a">
+                <input type="hidden" name="DictionaryId" id="word_dict" value="" data-theme="a">
+                <input type="text" name="WordItem" id="word_en" value="" placeholder="Английский" data-theme="a">
+                <input type="text" name="Translation" id="word_ru" value="" placeholder="Русский" data-theme="a">
+
+                <div>
+                    <img id="loading" style="width: 50px" src="../../Content/images/giphy.gif" />
+                </div>
+
+                <hr />
+
+                <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a"
+                   class="ui-link ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" role="button">Отменить</a>
+                <a href="#" onclick="SaveWord()" data-role="button" data-inline="true" data-transition="flow"
+                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Сохранить</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div data-role="popup" id="popupSaving" data-theme="a" class="ui-corner-all">
+    <div>
+        <div class="margin10">
+            <h3>Сохранение</h3>
+           
+            <div class="word-saving" >
+                <img src="../../Content/images/giphy.gif" />
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    backUrl = "/Dictionary/Index";
+
+    function AddWord(dictionaryId) {
+        $("#word_dict").val(dictionaryId);
+
+        $("#popupEditWord").popup();
+        $("#popupEditWord")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+    function EditWord(obj) {
+        var li = $(obj).closest("li");
+        var id = li.attr("word-id");
+        var en = li.attr("word-en");
+        var ru = li.attr("word-ru");
+
+        $("#word_en").val(en);
+        $("#word_ru").val(ru);
+        $("#word_id").val(id);
+
+        $("#popupEditWord").popup();
+        $("#popupEditWord")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+    function SaveWord() {
+        $("#popupEditWord").popup("close");
+
+        $('#popupEditWord').on({
+            popupafterclose: function() {
+                window.setTimeout(function () { Progress(); }, 100);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Dictionary/SaveWord",
+            data: $("#formEditWord").serialize(),
+            dataType: "json",
+            success: function (data) {
+                $("#popupSaving").popup("close");
+
+                if (data.Success === false) {
+                    alert("Ошибка сохранения: \n" + data.Message);
+                } else {
+                    //$("#popupEditWord").popup("close");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $("#popupSaving").popup("close");
+                alert("Ошибка отправки данных");
+            }
+        });
+
+    }
+
+    function Progress() {
+        $("#popupSaving").popup();
+        $("#popupSaving")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+
+</script>

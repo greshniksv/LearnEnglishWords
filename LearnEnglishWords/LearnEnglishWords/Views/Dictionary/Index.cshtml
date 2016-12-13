@@ -1,0 +1,29 @@
+﻿@model  IList<LearnEnglishWords.Models.DictionaryModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/site/dictionary.css">
+
+<div class="paln-list">
+    <ul class="margin10 custom-list" data-role="listview" data-inset="true">
+        <li data-role="list-divider"> Словари: </li>
+
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="#" onclick="redirect('/Dictionary/Show?id=@item.Id')">
+                    <b>@item.Name</b>
+                    <span class="ui-li-count ui-body-inherit">-</span>
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>
+
+<a data-role="button" class="margin10" data-icon="check" onclick="redirect('/Dictionary/Create')">Создать новый</a>
+
+<script type="text/javascript">
+    backUrl = "/Settings/Index"
+</script>
