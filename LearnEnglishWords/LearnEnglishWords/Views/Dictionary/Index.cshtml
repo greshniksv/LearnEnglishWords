@@ -6,24 +6,164 @@
 <link rel="stylesheet" type="text/css" href="/Content/site/dictionary.css">
 
 <div class="paln-list">
-    <ul class="margin10 custom-list" data-role="listview" data-inset="true">
+    <ul class="margin10 custom-list" data-role="listview" data-inset="true" data-split-icon="gear">
         <li data-role="list-divider"> Словари: </li>
 
         @foreach (var item in Model)
         {
-            <li>
+            <li dict-id="@item.Id" dict-name="@item.Name">
                 <a href="#" onclick="redirect('/Dictionary/Show?id=@item.Id')">
                     <b>@item.Name</b>
                     <span class="ui-li-count ui-body-inherit">-</span>
                 </a>
+                <a href="#" onclick="EditDictionary(this)"></a>
             </li>
         }
 
     </ul>
 </div>
 
-<a data-role="button" class="margin10" data-icon="check" onclick="redirect('/Dictionary/Create')">Создать новый</a>
+<a data-role="button" class="margin10" data-icon="check" onclick="AddDictionary()">Создать новый</a>
+
+<div data-role="popup" id="popupEditDictionary" data-theme="a" class="ui-corner-all">
+    <form id="formEditDictionary">
+        <div>
+            <div class="margin10">
+                <h3>Изменить солварь</h3>
+
+                <input type="hidden" name="id" id="dict_id" value="" data-theme="a">
+                <input type="text" name="Name" id="dict_name" value="" placeholder="Название" data-theme="a">
+
+                <hr />
+
+                <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a"
+                   class="ui-link ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" role="button">Закрыть</a>
+                <a href="#" onclick="RemoveDictionary()" data-role="button" data-inline="true" data-transition="flow"
+                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Уд</a>
+                <a href="#" onclick="SaveDictionary()" data-role="button" data-inline="true" data-transition="flow"
+                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Сохр</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div data-role="popup" id="popupSaving" data-theme="a" class="ui-corner-all">
+    <div>
+        <div class="margin10">
+            <h3>Сохранение</h3>
+
+            <div class="word-saving">
+                <img src="../../Content/images/giphy.gif" />
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
-    backUrl = "/Settings/Index"
+    backUrl = "/Settings/Index";
+
+    function AddDictionary() {
+        $("#dict_id").val(0);
+        $("#popupEditDictionary").popup();
+        $("#popupEditDictionary")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+
+    function EditDictionary(obj) {
+        var li = $(obj).closest("li");
+        var id = li.attr("dict-id");
+        var name = li.attr("dict-name");
+
+        $("#dict_id").val(id);
+        $("#dict_name").val(name);
+
+        $("#popupEditDictionary").popup();
+        $("#popupEditDictionary")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+
+    function RemoveDictionary() {
+        var id = $("#dict_id").val();
+        $("#popupEditDictionary").popup("close");
+
+        $('#popupEditDictionary').on({
+            popupafterclose: function () {
+                window.setTimeout(function () { Progress(); }, 100);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Dictionary/RemoveDictionary",
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+
+                if (data.Success === false) {
+                    alert("Ошибка удаления: \n" + data.Message);
+                } else {
+                    redirect("/Dictionary/Index");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+                alert("Ошибка отправки данных");
+            }
+        });
+    }
+
+    function SaveDictionary() {
+        $("#popupEditDictionary").popup("close");
+
+        $('#popupEditDictionary').on({
+            popupafterclose: function () {
+                window.setTimeout(function () { Progress(); }, 100);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Dictionary/SaveDictionary",
+            data: $("#formEditDictionary").serialize(),
+            dataType: "json",
+            success: function (data) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+
+                if (data.Success === false) {
+                    alert("Ошибка сохранения: \n" + data.Message);
+                } else {
+                    redirect("/Dictionary/Index");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+                alert("Ошибка отправки данных");
+            }
+        });
+
+    }
+
+    function Progress() {
+        $("#popupSaving").popup();
+        $("#popupSaving")
+            .popup("open",
+            {
+                transition: "pop",
+                positionTo: "window"
+            });
+    }
+
+
 </script>

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using LearnEnglishWords.Database;
 using LearnEnglishWords.Database.Entities;
 using MediatR;
@@ -18,7 +19,7 @@ namespace LearnEnglishWords.Queries
 
                     if (!existedWords.Any())
                     {
-                        return false;
+                        throw new Exception("'"+word+"' word is incorrect!");
                     }
                 }
                 return true;

@@ -412,6 +412,7 @@
     <EmbeddedResource Include="Database\Mappings\MainWords.hbm.xml">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <Content Include="Content\site\dictionary.css" />
     <Content Include="Content\site\show_word.css" />
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml">
@@ -466,8 +467,14 @@
     <Compile Include="Authentication\IAuthentication.cs" />
     <Compile Include="Authentication\UserIndentity.cs" />
     <Compile Include="Authentication\UserProvider.cs" />
+    <Compile Include="Commands\SaveDictionaryCommand.cs" />
+    <Compile Include="Commands\SaveDictionaryCommandHandler.cs" />
     <Compile Include="Commands\AddUserCommand.cs" />
     <Compile Include="Commands\AddUserCommandHandler.cs" />
+    <Compile Include="Commands\RemoveDictionaryCommand.cs" />
+    <Compile Include="Commands\RemoveDictionaryCommandHandler.cs" />
+    <Compile Include="Commands\RemoveWordCommand.cs" />
+    <Compile Include="Commands\RemoveWordCommandHandler.cs" />
     <Compile Include="Commands\RestorePasswordCommand.cs" />
     <Compile Include="Commands\RestorePasswordCommandHandler.cs" />
     <Compile Include="Commands\SaveWordCommand.cs" />
@@ -534,7 +541,6 @@
     <Content Include="Views\Register\PasswordRestored.cshtml" />
     <Content Include="Views\Dictionary\Index.cshtml" />
     <Content Include="Views\Dictionary\Show.cshtml" />
-    <Content Include="Views\Dictionary\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

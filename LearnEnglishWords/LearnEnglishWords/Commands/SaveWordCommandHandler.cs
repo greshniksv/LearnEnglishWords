@@ -18,10 +18,17 @@ namespace LearnEnglishWords.Commands
 
         public bool Handle(SaveWordCommand message)
         {
-            if (!_mediator.Send(new IsCorrectWordQuery { Word = message.Word.WordItem }))
+            if (string.IsNullOrEmpty(message.Word.WordItem))
             {
-                throw new Exception("English word is incorrect!");
+                throw new Exception("Word can't be empty");
             }
+
+            if (string.IsNullOrEmpty(message.Word.Translation))
+            {
+                throw new Exception("Word can't be empty");
+            }
+
+            _mediator.Send(new IsCorrectWordQuery { Word = message.Word.WordItem });
 
             using (var session = Db.Session)
             using (var transaction = session.BeginTransaction())

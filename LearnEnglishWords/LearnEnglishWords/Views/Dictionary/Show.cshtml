@@ -11,7 +11,7 @@
     <ul class="margin10 custom-list" data-role="listview" data-inset="true" data-split-icon="gear">
         <li data-role="list-divider"> Слова: </li>
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.Where(x=>!string.IsNullOrEmpty(x.WordItem)))
         {
             <li word-id='@item.Id' word-en='@item.WordItem' word-ru='@item.Translation'>
                 <a href="#">
@@ -36,16 +36,14 @@
                 <input type="text" name="WordItem" id="word_en" value="" placeholder="Английский" data-theme="a">
                 <input type="text" name="Translation" id="word_ru" value="" placeholder="Русский" data-theme="a">
 
-                <div>
-                    <img id="loading" style="width: 50px" src="../../Content/images/giphy.gif" />
-                </div>
-
                 <hr />
 
                 <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a"
-                   class="ui-link ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" role="button">Отменить</a>
+                   class="ui-link ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" role="button">Закрыть</a>
+                <a href="#" onclick="RemoveWord()" data-role="button" data-inline="true" data-transition="flow"
+                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Уд</a>
                 <a href="#" onclick="SaveWord()" data-role="button" data-inline="true" data-transition="flow"
-                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Сохранить</a>
+                   data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Сохр</a>
             </div>
         </div>
     </form>
@@ -98,6 +96,37 @@
             });
     }
 
+    function RemoveWord() {
+        var id = $("#word_id").val();
+        $("#popupEditWord").popup("close");
+
+        $('#popupEditWord').on({
+            popupafterclose: function () {
+                window.setTimeout(function () { Progress(); }, 100);
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/Dictionary/RemoveWord",
+            data: {id: id},
+            dataType: "json",
+            success: function (data) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+
+                if (data.Success === false) {
+                    alert("Ошибка удаления: \n" + data.Message);
+                } else {
+                    redirect("/Dictionary/Show?id=@Model.First().DictionaryId");
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+                alert("Ошибка отправки данных");
+            }
+        });
+    }
+
     function SaveWord() {
         $("#popupEditWord").popup("close");
 
@@ -113,16 +142,16 @@
             data: $("#formEditWord").serialize(),
             dataType: "json",
             success: function (data) {
-                $("#popupSaving").popup("close");
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
 
                 if (data.Success === false) {
                     alert("Ошибка сохранения: \n" + data.Message);
                 } else {
-                    //$("#popupEditWord").popup("close");
+                    redirect("/Dictionary/Show?id=@Model.First().DictionaryId");
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $("#popupSaving").popup("close");
+                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
                 alert("Ошибка отправки данных");
             }
         });

@@ -34,9 +34,18 @@ namespace LearnEnglishWords.Controllers
             return View(words);
         }
 
-        public ActionResult Create()
+        public ActionResult RemoveWord(int id)
         {
-            return View();
+            var userId = HttpContext.UserId();
+            try
+            {
+                _mediator.Send(new RemoveWordCommand() { WordId = id, UserId = userId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, Message = ex.Message });
+            }
+            return Json(new { Success = true, Message = "" });
         }
 
         public ActionResult SaveWord(WordModel model)
@@ -44,6 +53,34 @@ namespace LearnEnglishWords.Controllers
             try
             {
                 _mediator.Send(new SaveWordCommand { Word = model });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, Message = ex.Message });
+            }
+            return Json(new { Success = true, Message = "" });
+        }
+
+        public ActionResult RemoveDictionary(int id)
+        {
+            var userId = HttpContext.UserId();
+            try
+            {
+                _mediator.Send(new RemoveDictionaryCommand { DictionaryId = id, UserId = userId });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Success = false, Message = ex.Message });
+            }
+            return Json(new { Success = true, Message = "" });
+        }
+
+        public ActionResult SaveDictionary(DictionaryModel model)
+        {
+            var userId = HttpContext.UserId();
+            try
+            {
+                _mediator.Send(new SaveDictionaryCommand() { Model = model, UserId = userId });
             }
             catch (Exception ex)
             {
