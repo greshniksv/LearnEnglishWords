@@ -414,6 +414,7 @@
     </EmbeddedResource>
     <Content Include="Content\site\dictionary.css" />
     <Content Include="Content\site\show_word.css" />
+    <Content Include="Content\site\wizard.css" />
     <Content Include="Global.asax" />
     <Content Include="hibernate.cfg.xml">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -487,6 +488,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\WizardController.cs" />
     <Compile Include="Database\Db.cs" />
     <Compile Include="Database\Entities\Interfaces\IDeleteMarker.cs" />
     <Compile Include="Database\Entities\Progress.cs" />
@@ -508,6 +510,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DictionaryModel.cs" />
+    <Compile Include="Models\GameSettingsModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\WordModel.cs" />
@@ -541,6 +544,10 @@
     <Content Include="Views\Register\PasswordRestored.cshtml" />
     <Content Include="Views\Dictionary\Index.cshtml" />
     <Content Include="Views\Dictionary\Show.cshtml" />
+    <Content Include="Views\Wizard\index.cshtml" />
+    <Content Include="Views\Wizard\SelectWords.cshtml" />
+    <Content Include="Views\Wizard\SelectGame.cshtml" />
+    <Content Include="Views\Wizard\ManualSelectWords.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

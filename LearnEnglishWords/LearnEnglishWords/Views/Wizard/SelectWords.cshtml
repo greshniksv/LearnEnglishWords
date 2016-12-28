@@ -1,0 +1,54 @@
+﻿@model List<LearnEnglishWords.Models.DictionaryModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/site/wizard.css">
+
+<div class="title">
+    <p> Если вы хотите запустить игру жмите Далее. <br /> Если нет жмите Назад. </p>
+</div>
+
+<form id="game_settings" action="/Wizard/SelectGame" method="post">
+    
+    <label for="dictionary" class="margin10"> Словарь: </label>
+    <select name="dictionary" id="dictionary">
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id"> @item.Name </option>
+        }
+    </select>
+
+    <label for="collection_type" class="margin10"> Тип выборки: </label>
+    <select name="type" id="collection_type">
+        <option selected="selected" id="1">Плохо извесные</option>
+        <option value="2">Последние добавленные</option>
+        <option value="3">Случайно</option>
+        <option value="4">Свой выбор</option>
+    </select>
+
+    <label for="word_count" class="margin10"> Количество слов: </label>
+    <select name="count" id="word_count">
+        <option selected="selected" value="10">10</option>
+        @for (int i = 10; i <= 100; i += 10)
+        {
+            <option value="@i">@i</option>
+        }
+    </select>
+
+</form>
+<a data-role="button" class="margin10" data-icon="bullets" onclick="Next()">Далее</a>
+
+<script type="text/javascript">
+    backUrl = "/Wizard/Index";
+
+    function Next() {
+
+        if ($("#collection_type option:selected").val() === "4") {
+            $("#game_settings").attr("action", "/Wizard/ManualSelectWords");
+        }
+
+        $('#game_settings').submit();
+    }
+
+</script>

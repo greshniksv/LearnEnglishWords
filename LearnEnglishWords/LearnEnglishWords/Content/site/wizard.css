@@ -1,0 +1,10 @@
+﻿.title{
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.ui-select {
+    margin-left: 10px;
+    margin-right: 10px;
+}

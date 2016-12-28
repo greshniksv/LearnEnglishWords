@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="/Content/site/wizard.css">
+
+<div class="title">
+    <p> Если вы хотите запустить игру жмите Далее. <br /> Если нет жмите Назад. </p>
+</div>
+
+<a data-role="button" class="margin10" data-icon="bullets" onclick="redirect('/Wizard/SelectWords')">Далее</a>
+
+<script type="text/javascript">
+    backUrl = "/Home/Index";
+</script>

@@ -47,6 +47,20 @@
     </form>
 </div>
 
+<div data-role="popup" id="Question" data-theme="a" class="ui-corner-all">
+    <div>
+        <div class="margin10">
+            <h3>Удалить словарь и все слова в нем ? </h3>
+            <hr />
+
+            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="a"
+               class="ui-link ui-btn ui-btn-a ui-btn-inline ui-shadow ui-corner-all" role="button">Нет</a>
+            <a href="#" onclick="RemoveDectionaryAction()" data-role="button" data-inline="true" data-transition="flow"
+               data-theme="b" class="ui-link ui-btn ui-btn-b ui-btn-inline ui-shadow ui-corner-all" role="button">Да</a>
+        </div>
+    </div>
+</div>
+
 <div data-role="popup" id="popupSaving" data-theme="a" class="ui-corner-all">
     <div>
         <div class="margin10">
@@ -66,14 +80,8 @@
     function AddDictionary() {
         $("#dict_id").val(0);
         $("#popupEditDictionary").popup();
-        $("#popupEditDictionary")
-            .popup("open",
-            {
-                transition: "pop",
-                positionTo: "window"
-            });
+        $("#popupEditDictionary").popup("open", { transition: "pop", positionTo: "window" });
     }
-
 
     function EditDictionary(obj) {
         var li = $(obj).closest("li");
@@ -82,47 +90,67 @@
 
         $("#dict_id").val(id);
         $("#dict_name").val(name);
-
         $("#popupEditDictionary").popup();
-        $("#popupEditDictionary")
-            .popup("open",
-            {
-                transition: "pop",
-                positionTo: "window"
-            });
+        $("#popupEditDictionary").popup("open", { transition: "pop", positionTo: "window" });
     }
 
 
     function RemoveDictionary() {
         var id = $("#dict_id").val();
+        var name = $("#dict_name").val();
         $("#popupEditDictionary").popup("close");
 
         $('#popupEditDictionary').on({
             popupafterclose: function () {
-                window.setTimeout(function () { Progress(); }, 100);
-            }
-        });
+                window.setTimeout(function() {
 
-        $.ajax({
-            type: "POST",
-            url: "/Dictionary/RemoveDictionary",
-            data: { id: id },
-            dataType: "json",
-            success: function (data) {
-                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+                    $("#Question").popup();
+                    $("#Question").popup("open", { transition: "pop", positionTo: "window" });
 
-                if (data.Success === false) {
-                    alert("Ошибка удаления: \n" + data.Message);
-                } else {
-                    redirect("/Dictionary/Index");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
-                alert("Ошибка отправки данных");
+                }, 200);
             }
         });
     }
+
+    function RemoveDectionaryAction() {
+        var id = $("#dict_id").val();
+
+        $("#Question").popup("close");
+        $('#Question').on({
+            popupafterclose: function () {
+                window.setTimeout(function () {
+
+                    $('#popupEditDictionary').on({
+                        popupafterclose: function () {
+                            window.setTimeout(function () { Progress(); }, 100);
+                        }
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Dictionary/RemoveDictionary",
+                        data: { id: id },
+                        dataType: "json",
+                        success: function (data) {
+                            window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+
+                            if (data.Success === false) {
+                                alert("Ошибка удаления: \n" + data.Message);
+                            } else {
+                                redirect("/Dictionary/Index");
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            window.setTimeout(function () { $("#popupSaving").popup("close"); }, 200);
+                            alert("Ошибка отправки данных");
+                        }
+                    });
+
+                }, 200);
+            }
+        });
+    }
+
 
     function SaveDictionary() {
         $("#popupEditDictionary").popup("close");

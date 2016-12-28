@@ -1,0 +1,20 @@
+﻿@model IList<LearnEnglishWords.Models.WordModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+Bls
+
+<script type="text/javascript">
+    backUrl = "/Wizard/Index";
+
+    var words = [
+        @foreach (var item in Model)
+        {
+            @Html.Raw("{ \"id\":\"" + item.Id+ "\", \"en\":\"" + item.WordItem + "\", \"ru\":\"" + item.Translation + "\", },")
+        }
+    ];
+
+
+
+</script>
